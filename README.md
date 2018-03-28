@@ -88,6 +88,8 @@ ADO.NET ile ilişkili dosyalar DataAccessLayer,Facade ve Core sınıf kütüphan
   
   ```
   
+  Bu kütüphane temel veri tipleriyle çalışmak için tasarlanmıştır. Datalayer/DataAccess sınıfındaki DataMatch metodu nesne tipine göre sınıflandırma yapmaktadır. 
+  Desteklenen veri tipleri=> DateTime, String, Boolean, Double, Short, Long, Int32, Byte, SByte, Decimal, Byte[], Guid
   
   
   
