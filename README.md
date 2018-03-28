@@ -40,6 +40,16 @@ ADO.NET ile ilişkili dosyalar DataAccessLayer,Facade ve Core sınıf kütüphan
   
   #Proje (Örnek Kullanım)
   
+  Bütün metodlar değişken olarak bir parametre listesi alırlar. Çünkü bütün sorgular paremetrik şekilde çalışmalıdır. 
+  Generic Read Metodu hedef veritabanında ki bir stored procedure'u çalıştırıp geriye değerleri döner. Bu metodlar çalıştırılmadan önce   Core sınıf kütüphanesi altında gerekli class ve özellikleri yaratılmalıdır. Özellik isimleri ve veritabanı kolonlarının isimleri aynı   olmalıdır. Çünkü metod reflection ile özellikleri okumakta ve okuduğu isimlere göre dataları eşleştirmektedir.
+  
+  CUD metodu ise geriye değer dönmeyen procedureler için kullanılmaktadır. Insert,Delete ve Update işlemleri için kullanılır.
+  
+  ReadManuel ve CUDManuel metodları procedure yerine raw query kullanır. Örnek sorgu cümlecikleri aşağıda ki kod bloğunda mevcuttur.
+  
+  Clear metodları sadece aynı listeyi tekrar tekrar kullanabilmek için kullanılmıştır.
+  
+  
   ```
   using (var db=new DataLayer.DataAccess())//IDisposable
    {
