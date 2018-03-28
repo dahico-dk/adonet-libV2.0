@@ -70,7 +70,8 @@ ADO.NET ile ilişkili dosyalar DataAccessLayer,Facade ve Core sınıf kütüphan
 	paramlist.Clear();//listeleri boşaltalım-Clearing lis
 	paramlist.Add(new SqlParameter("@id", 42));//42 idli satırı silelim mesela-Deleting row which have 42 as id
 
-	//CUD metodu geriye true ya da false döner. Buradan işlemin başarılı olup olmadığı takip edilebilir. CUD method returns true or false depending upon succession of transaction
+	//CUD metodu geriye true ya da false döner. Buradan işlemin başarılı olup olmadığı takip edilebilir. 
+	//CUD method returns true or false depending upon succession of transaction
 	bool validate = db.CUD("sp_SatirSil", paramlist);
 	paramlist.Clear();
 				
@@ -80,7 +81,8 @@ ADO.NET ile ilişkili dosyalar DataAccessLayer,Facade ve Core sınıf kütüphan
 	paramlist.Add(new SqlParameter("42", "So Long, and Thanks for All the Fish "));//1st parameter (sample)
 	paramlist.Add(new SqlParameter("13", "GNU Terry Pratchett"));//2nd parameter (sample)
 
-	//CUDManuel metodu tıpkı CUD gibi geriye true ya da false döner. Tek farkı sorgunun elle girilmiş olmasıdır.CUDmanuel method returns true or false depending upon succession of transaction CUD method. Only difference is raw query.
+	//CUDManuel metodu tıpkı CUD gibi geriye true ya da false döner. Tek farkı sorgunun elle girilmiş olmasıdır.
+	//CUDmanuel method returns true or false depending upon succession of transaction CUD method. Only difference is raw query.
 	validate = db.CUDManuel(insertquery, paramlist);
 	}
   
