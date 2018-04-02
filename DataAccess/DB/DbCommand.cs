@@ -14,6 +14,26 @@ namespace DataAccessLayer
 		private SqlCommand _com = null;
 		private SqlTransaction _trans;
 		//Netsisten veya benzer eski tip db kullanan programlardan kaynaklı olan türkçe karakter sorununun çözüm metodu
+		public bool TestConnection()
+		{
+			try
+			{
+				using (SqlConnection conn = DataAccessLayer.DbConnection.ConnectionGet())
+				{
+					conn.Open();
+					if (conn.State == System.Data.ConnectionState.Open)
+					{
+						return true;
+					}
+					conn.Close();
+					return false;
+				}
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
 		static string MSTurkce(string windowsTurkce)
 		{			
 			return Encoding.Default.GetString(Encoding.GetEncoding(1252).GetBytes(windowsTurkce));
@@ -36,10 +56,6 @@ namespace DataAccessLayer
 			this._con = con;
 			KomutOlustur(spName);
 		}
-
-		
-
-
 		/// <summary>
 		/// procedure için komut olusutma işlemi 
 		/// </summary>
