@@ -1,16 +1,14 @@
 # adonet-lib
 
-adonet-libV2.0 farklı sınıf kütüphanelerine bölünmüş bir ADO.NET uygulama projesidir. ADO.NET kullanılmak istenen herhangi bir projeye kolaylıkla entegre edilebilir.
+adonet-libV2.0 bit ADO.NET uygulama projesidir. ADO.NET ile bağlantı işlemlerinin yapılacağı herhangi bir projeye kolaylıkla entegre edilebilir.
 
-SAMPLE projesi bu bağlantı tipini uygulayan bir MVC projesidir.
+SAMPLE projesi bu bağlantı tipini uygulayan bir ASP.NET MVC projesidir.
 
 ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
 
 ### Veritabanı bağlantısı:
 
-  *Proje veritabanı bağlantılarının bilgilerini entegre edildiği .NET Projesinin config dosyasından çeker. Kullanıcı config dosyasını kullanmak istemez ise bağlantı cümleciği ayarları DataLayer/DB/DbConnection sınıfındadır. 
-
-  *DataLayer sınıf kütüphanesindeki Helper sınıfı config dosyasından bağlantı cümleciği olusturma işlemini yapar.
+  *Proje veritabanı bilgilerini entegre edildiği .NET Projesinin config dosyasından çeker.DataLayer sınıf kütüphanesindeki Helper sınıfı config dosyasından bağlantı cümlesi olusturma işlemini yapar. Config dosyası kullanılmak istenmezse bağlantı cümlesi ayarları DataLayer/DB/DbConnection sınıfındadır. 
 
   *DBConnection sınıfı veritabanı bağlantısı açma kapama işlemlerini üstlenir.
 
@@ -19,11 +17,11 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
   ```
   ---
 
-  Proje genel olarak 2 sınıf kütüphanesinden meydana gelmektedir.
+  Proje 2 sınıf kütüphanesinden meydana gelmektedir.
   
   # Core
   
-  Core kütüphanesi veritabanı nesneleri ile eşlenecek sınıfları barındırır. Veritabanından dönen veriler bu sınıflara yüklenir. iç içe sınıflar ya da yapıcı metodlar yardımı ile farklı şekillerde bu nesneler tek dosyada yaratılabilir. Ben ayrı sınıflarda tutmayı tercih ediyorum. Özellik isimleri veritabanı kolon isimleri ile uyuşmalıdır. 
+  Core kütüphanesi veritabanı nesneleri ile eşleşecek sınıfları barındırır. Veritabanından dönen veriler bu sınıflara yüklenir.Özellik isimleri veritabanı kolon isimleri ile uyuşmalıdır. 
   ```
   //Örnek core sınıfı
    public class SampleCore
@@ -35,11 +33,13 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
   ```
   # DataLayer
   
-  Bütün veritabanı işlemlerinin yapıldığı katman bu katmandır. DbCommand veritabanı komut işlemlerinin DbConnection ise bağlantı ayarlarının düzenlendiği sınıftır. Helper sınıfı bağlantı cümleciği oluşturma işlemlerine yardımcı olur.
+  Bütün veritabanı işlemlerinin yapıldığı katmandır. DbCommand sınıfı veritabanı komut işlemlerinin, DbConnection sınıfı ise bağlantı ayarlarının düzenlendiği sınıftır. 
+  
   ####DataLayer metodları
   
   ##### Read metodu
-  Generic bir metod olan Read metodu bir SqlParameter listesi ve string tipinden stored procedure adını parametre olarak alır. Select yapan Stored Procedure veritabanında mevcut bulunmalıdır. Generic tip olarak çekilecek olan veritabanı tablosuyla örtüşen Core sınıfı kullanılır. Geriye seçilen Core sınıfından bir liste döner.
+  Generic bir metod olan Read metodu bir SqlParameter listesi ve kullanılacak stored procedure adını parametre olarak alır. Select işlemini yapan Stored Procedure veritabanında mevcut bulunmalıdır. Generic tip olarak çekilecek olan veritabanı tablosuyla örtüşen Core sınıfı kullanılır. Geriye seçilen Core sınıfından bir liste döner.
+  
   Dipnot:Read,RaedManuel ve CUD metodları aynı parametre listesini kullanmaktadır.
   
   Örnek
@@ -50,7 +50,7 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
 		
    };//parametre listesinin yaratılması
           
-    //Stored Procedure ile data çekilmesi-Using Stored procedures
+    //Stored Procedure ile data çekilmesi
     List<Core.SampleCore> samplelist = db.Read<Core.SampleCore>("sp_TestProc", paramlist);//veritabanından select işlemi id'si 42 olan    satır ya da satırlar
         
   ```
@@ -62,40 +62,43 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
   
   ```
      
-   //Raw Query ile data çekilmesi-Pull data with raw query
+   //Raw Query ile data çekilmesi
    string query = "Select * from SampleTable where ID=@id";				
    samplelist = db.ReadManuel<Core.SampleCore>(query, paramlist);
   ```
   
   
   ##### CUD metodu (Create Update Delete)
-  İnsert,update ve delete işlemlerini yapan bu metod geriye boolean tipinden bir değer döner. Doğal olarak true değeri işlemin başarıyla sonuçlandığını ifade eder. Parametre olarak bir SqlParameter listesi ve CUD işlemini yapacak stored procedure adını alır
+  
+  İnsert,update ve delete işlemlerini yapan bu metod geriye boolean tipinden bir değer döner. Doğal olarak true değeri işlemin başarıyla sonuçlandığını ifade eder. Parametre olarak bir SqlParameter listesi ve CUD işlemini yapacak olan stored procedure adını alır
   
   ```
-   //Geriye data dönmeyen işlemler(Create,Update,Delete)-Database transactions with no data returning 
-   //CUD metodu geriye true ya da false döner. Buradan işlemin başarılı olup olmadığı takip edilebilir. CUD method returns true or false depending upon succession of transaction
+   //Geriye data dönmeyen işlemler(Create,Update,Delete)
+   //CUD metodu geriye true ya da false döner. Buradan işlemin başarılı olup olmadığı takip edilebilir.
      bool validate = db.CUD("sp_SatirSil", paramlist);//42 idli satiri sil
 				
   ```
   
   
  ##### CUDManuel metodu (Create Update Delete)
+ 
  Tıpkı ReadManuel işleminde olduğu gibi CUDManuel metodu da stored procedure yerine kendisine verilen query'i kullanarak CUD işlemlerini gerçekleştirir.
   
   ```
-   //Raw query ile işlemler. Transactions with raw query
+   //Raw query ile işlemler
       paramlist.Clear();//parametre listesinin temizlenmesi
       string insertquery="Insert into TB_Sample values @val1,@val2)";
       paramlist.Add(new SqlParameter("42", "So Long, and Thanks for All the Fish "));
       validate = db.CUDManuel(insertquery, paramlist);//ilk satırin inserti
       paramlist.Clear();//parametre listesinin temizlenmesi
-//CUDManuel metodu tıpkı CUD gibi geriye true ya da false döner. Tek farkı sorgunun elle girilmiş olmasıdır.CUDmanuel method returns true or false depending upon succession of transaction CUD method. Only difference is raw query.
+//CUDManuel metodu tıpkı CUD gibi geriye true ya da false döner. Tek farkı sorgunun elle girilmiş olmasıdır.
       paramlist.Add(new SqlParameter("13", "GNU Terry Pratchett"));//2. satir inserti
       validate = db.CUDManuel(insertquery, paramlist);//ikinci satir insert		
 				
   ```
   
   Bu kütüphane temel veri tipleriyle çalışmak için tasarlanmıştır. Datalayer/DataAccess sınıfındaki DataMatch metodu nesne tipine göre sınıflandırma yapmaktadır. 
+  
   #### Desteklenen veri tipleri
   * DateTime
   * String
