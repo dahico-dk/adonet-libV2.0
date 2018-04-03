@@ -8,11 +8,7 @@ The files associated with ADO.NET are located in the DataLayer library.
 
 ### Database Connection:
 
-  *Project pulls credential information for database connections from the config file of the .NET project in which it is integrated. If the user does not want to pull the informayion from the config file, the connection string settings are in the DataLayer / DB / DbConnection class.
-
-  *The Helper class in the DataLayer class library creates the connection string from the config file.
-
-  *The DBConnection class handles database connection and disconnection operations.
+   Project pulls credential information for database connections from the config file of the .NET project in which it is integrated. If the user does not want to pull the informayion from the config file, the connection string settings are in the DataLayer / DB / DbConnection class.The Helper class in the DataLayer class library creates the connection string from the config file. The DBConnection class handles database connection and disconnection operations.
 
   ```
   public static readonly string connectionString = DB.Helper.connectionstring();//This method reads from config file
