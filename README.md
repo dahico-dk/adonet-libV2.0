@@ -27,11 +27,11 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
   ```
   //Örnek core sınıfı
    public class SampleCore
-	{
-		public int ID { get; set; }
-		public string Val1 { get; set; }
-		public string Val2 { get; set; }
-	}
+   {
+   	public int ID { get; set; }
+   	public string Val1 { get; set; }
+   	public string Val2 { get; set; }
+   }
   ```
   # DataLayer
   
@@ -40,25 +40,31 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
   
   ##### Read metodu
   Generic bir metod olan Read metodu bir SqlParameter listesi ve string tipinden stored procedure adını parametre olarak alır. Select yapan Stored Procedure veritabanında mevcut bulunmalıdır. Generic tip olarak çekilecek olan veritabanı tablosuyla örtüşen Core sınıfı kullanılır. Geriye seçilen Core sınıfından bir liste döner.
+  Dipnot:Read,RaedManuel ve CUD metodları aynı parametre listesini kullanmaktadır.
   
   Örnek
+  
    ```
-    List<SqlParameter> paramlist = new List<SqlParameter>(); //parametre listesinin yaratılması-Creating parameter lists   
-    paramlist.Add(new SqlParameter("name","value"));//1st parameter (sample)
-    paramlist.Add(new SqlParameter("name", "value"));//2nd parameter (sample)   
+   List<SqlParameter> paramlist = new List<SqlParameter>() {
+		new SqlParameter("id","42"),
+		
+   };//parametre listesinin yaratılması
+          
     //Stored Procedure ile data çekilmesi-Using Stored procedures
-    List<Core.SampleCore> samplelist = db.Read<Core.SampleCore>("sp_TestProc", paramlist);//veritabanından select işlemi
-    
+    List<Core.SampleCore> samplelist = db.Read<Core.SampleCore>("sp_TestProc", paramlist);//veritabanından select işlemi id'si 42 olan    satır ya da satırlar
+        
   ```
+  
   
   ##### ReadManuel metodu
   Read metodunun benzeri olan bu metodun tek farkı stored procedure yerine string olarak kendisine verilen sorguyu kullanmasıdır. Sql injection'dan kaçınmak için parametreler bir SqlParameter listesi olarak işlenir.
   
+  
   ```
-     List<SqlParameter> paramlist = new List<SqlParameter>(); //parametre listesinin yaratılması-Creating parameter lists
-     string query = "Select * from SampleTable where ID=@id";
-     paramlist.Add(new SqlParameter("@id", 42));//1st parameter(sample)
-     List<Core.SampleCore> samplelist = db.ReadManuel<Core.SampleCore>(query, paramlist);
+     
+   //Raw Query ile data çekilmesi-Pull data with raw query
+   string query = "Select * from SampleTable where ID=@id";				
+   samplelist = db.ReadManuel<Core.SampleCore>(query, paramlist);
   ```
   
   
@@ -66,10 +72,9 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
   İnsert,update ve delete işlemlerini yapan bu metod geriye boolean tipinden bir değer döner. Doğal olarak true değeri işlemin başarıyla sonuçlandığını ifade eder. Parametre olarak bir SqlParameter listesi ve CUD işlemini yapacak stored procedure adını alır
   
   ```
-  List<SqlParameter> paramlist = new List<SqlParameter>();
-  paramlist.Add(new SqlParameter("@id", 42));//42 idli satırı silelim mesela
-  //CUD metodu geriye true ya da false döner. Buradan işlemin başarılı olup olmadığı takip edilebilir. 
-  bool validate = db.CUD("sp_SatirSil", paramlist);
+   //Geriye data dönmeyen işlemler(Create,Update,Delete)-Database transactions with no data returning 
+   //CUD metodu geriye true ya da false döner. Buradan işlemin başarılı olup olmadığı takip edilebilir. CUD method returns true or false depending upon succession of transaction
+     bool validate = db.CUD("sp_SatirSil", paramlist);//42 idli satiri sil
 				
   ```
   
@@ -78,13 +83,15 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
  Tıpkı ReadManuel işleminde olduğu gibi CUDManuel metodu da stored procedure yerine kendisine verilen query'i kullanarak CUD işlemlerini gerçekleştirir.
   
   ```
-   List<SqlParameter> paramlist = new List<SqlParameter>();
-  //Raw query ile işlemler. Transactions with raw query
-  string insertquery="Insert into TB_Sample values @val1,@val2)";
-  paramlist.Add(new SqlParameter("42", "So Long, and Thanks for All the Fish "));//1st parameter (sample)
-  paramlist.Add(new SqlParameter("13", "GNU Terry Pratchett"));//2nd parameter (sample)
-  //CUDManuel metodu tıpkı CUD gibi geriye true ya da false döner. Tek farkı sorgunun elle girilmiş olmasıdır.
-   bool validate = db.CUDManuel(insertquery, paramlist);			
+   //Raw query ile işlemler. Transactions with raw query
+      paramlist.Clear();//parametre listesinin temizlenmesi
+      string insertquery="Insert into TB_Sample values @val1,@val2)";
+      paramlist.Add(new SqlParameter("42", "So Long, and Thanks for All the Fish "));
+      validate = db.CUDManuel(insertquery, paramlist);//ilk satırin inserti
+      paramlist.Clear();//parametre listesinin temizlenmesi
+//CUDManuel metodu tıpkı CUD gibi geriye true ya da false döner. Tek farkı sorgunun elle girilmiş olmasıdır.CUDmanuel method returns true or false depending upon succession of transaction CUD method. Only difference is raw query.
+      paramlist.Add(new SqlParameter("13", "GNU Terry Pratchett"));//2. satir inserti
+      validate = db.CUDManuel(insertquery, paramlist);//ikinci satir insert		
 				
   ```
   
