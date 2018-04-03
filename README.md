@@ -37,7 +37,7 @@ The files associated with ADO.NET are located in the DataLayer library.
   
 
  This is the layer where all database operations are made. DbCommand contains methods for configuring command operations.DbConnection class organizes connection operations. Helper class creates connections string from config file.
-  ####DataLayer metodları
+  #### DataLayer metodları
   
   ##### Read method
   The Read method which is a generic method takes a SqlParameter list and a stored procedure name as string. The Stored Procedure which makes the select operation must be available in the database. The Core class that overlaps with the database table must be used as generic type. Returns a list of the selected Core class.
