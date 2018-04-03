@@ -1,6 +1,6 @@
 # adonet-lib
 
-ADO.NET-LIB farklı sınıf kütüphanelerine bölünmüş bir ADO.NET uygulama projesidir. ADO.NET kullanılmak istenen herhangi bir projeye kolaylıkla entegre edilebilir.
+adonet-libV2.0 farklı sınıf kütüphanelerine bölünmüş bir ADO.NET uygulama projesidir. ADO.NET kullanılmak istenen herhangi bir projeye kolaylıkla entegre edilebilir.
 
 SAMPLE projesi bu bağlantı tipini uygulayan bir MVC projesidir.
 
@@ -21,7 +21,7 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
 
   Proje genel olarak 2 sınıf kütüphanesinden meydana gelmektedir.
   
-  #Core
+  # Core
   
   Core kütüphanesi veritabanı nesneleri ile eşlenecek sınıfları barındırır. Veritabanından dönen veriler bu sınıflara yüklenir. iç içe sınıflar ya da yapıcı metodlar yardımı ile farklı şekillerde bu nesneler tek dosyada yaratılabilir. Ben ayrı sınıflarda tutmayı tercih ediyorum. Özellik isimleri veritabanı kolon isimleri ile uyuşmalıdır. 
   ```
@@ -33,12 +33,12 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
 		public string Val2 { get; set; }
 	}
   ```
-  #DataLayer
+  # DataLayer
   
   Bütün veritabanı işlemlerinin yapıldığı katman bu katmandır. DbCommand veritabanı komut işlemlerinin DbConnection ise bağlantı ayarlarının düzenlendiği sınıftır. Helper sınıfı bağlantı cümleciği oluşturma işlemlerine yardımcı olur.
   ####DataLayer metodları
   
-  #####Read metodu
+  ##### Read metodu
   Generic bir metod olan Read metodu bir SqlParameter listesi ve string tipinden stored procedure adını parametre olarak alır. Select yapan Stored Procedure veritabanında mevcut bulunmalıdır. Generic tip olarak çekilecek olan veritabanı tablosuyla örtüşen Core sınıfı kullanılır. Geriye seçilen Core sınıfından bir liste döner.
   
   Örnek
@@ -51,7 +51,7 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
     
   ```
   
-  #####ReadManuel metodu
+  ##### ReadManuel metodu
   Read metodunun benzeri olan bu metodun tek farkı stored procedure yerine string olarak kendisine verilen sorguyu kullanmasıdır. Sql injection'dan kaçınmak için parametreler bir SqlParameter listesi olarak işlenir.
   
   ```
@@ -62,7 +62,7 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
   ```
   
   
-  #####CUD metodu (Create Update Delete)
+  ##### CUD metodu (Create Update Delete)
   İnsert,update ve delete işlemlerini yapan bu metod geriye boolean tipinden bir değer döner. Doğal olarak true değeri işlemin başarıyla sonuçlandığını ifade eder. Parametre olarak bir SqlParameter listesi ve CUD işlemini yapacak stored procedure adını alır
   
   ```
@@ -74,7 +74,7 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
   ```
   
   
- #####CUDManuel metodu (Create Update Delete)
+ ##### CUDManuel metodu (Create Update Delete)
  Tıpkı ReadManuel işleminde olduğu gibi CUDManuel metodu da stored procedure yerine kendisine verilen query'i kullanarak CUD işlemlerini gerçekleştirir.
   
   ```
@@ -89,7 +89,7 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
   ```
   
   Bu kütüphane temel veri tipleriyle çalışmak için tasarlanmıştır. Datalayer/DataAccess sınıfındaki DataMatch metodu nesne tipine göre sınıflandırma yapmaktadır. 
-  ####Desteklenen veri tipleri
+  #### Desteklenen veri tipleri
   * DateTime
   * String
   * Boolean 
