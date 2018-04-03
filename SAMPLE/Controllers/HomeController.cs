@@ -12,8 +12,10 @@ namespace adonet_libV2._0.Controllers
 	{
 		public ActionResult Index()
 		{
+			
 			using (var db=new DataLayer.DataAccess())//IDisposable
 			{
+				
 				List<SqlParameter> paramlist = new List<SqlParameter>();
 				List<Core.SampleCore> samplelist = new List<Core.SampleCore>();
 				//parametre listesinin yaratılması-Creating parameter lists
