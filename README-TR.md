@@ -92,7 +92,7 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
       validate = db.CUDManuel(insertquery, paramlist);//ilk satırin inserti
       paramlist.Clear();//parametre listesinin temizlenmesi
 //CUDManuel metodu tıpkı CUD gibi geriye true ya da false döner. Tek farkı sorgunun elle girilmiş olmasıdır.
-      paramlist.Add(new SqlParameter("13", "GNU Terry Pratchett"));//2. satir inserti
+      paramlist.Add(new SqlParameter("8", "GNU Terry Pratchett"));//2. satir inserti
       validate = db.CUDManuel(insertquery, paramlist);//ikinci satir insert		
 				
   ```
