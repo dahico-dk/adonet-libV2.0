@@ -87,7 +87,7 @@ The files associated with ADO.NET are located in the DataLayer library.
       validate = db.CUDManuel(insertquery, paramlist);//First row
       paramlist.Clear();
 //.CUDmanuel method returns true or false depending upon succession of transaction CUD method. Only difference is raw query.
-      paramlist.Add(new SqlParameter("13", "GNU Terry Pratchett"));//2nd row
+      paramlist.Add(new SqlParameter("8", "GNU Terry Pratchett"));//2nd row
       validate = db.CUDManuel(insertquery, paramlist);//insert 2nd row		
 				
   ```
