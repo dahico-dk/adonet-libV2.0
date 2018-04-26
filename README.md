@@ -8,7 +8,7 @@ The files associated with ADO.NET are located in the DataLayer library.
 
 ### Database Connection:
 
-   Project pulls credential information for database connections from the config file of the .NET project in which it is integrated. If the user does not want to pull the information from the config file, the connection string settings are in the DataLayer/DB/DbConnection class.The Helper class in the DataLayer class library creates the connection string from the config file. The DbConnection class handles database connection and disconnection operations.
+   Project pulls credential information for database connections from the config file of the .NET project in which it is integrated. If the user does not want to pull the information from the config file, the connection string settings are in the DataLayer/DB/DbConnection class. The Helper class in the DataLayer class library creates the connection string from the config file. The DbConnection class handles database connection and disconnection operations.
 
   ```
   public static readonly string connectionString = DB.Helper.connectionstring();//This method reads from config file
@@ -31,9 +31,9 @@ The files associated with ADO.NET are located in the DataLayer library.
   ```
   # DataLayer
   
-
  This is the layer where all database operations are made. DbCommand contains methods for configuring command operations.DbConnection class organizes connection operations. Helper class creates connections string from config file.
-  #### DataLayer metodları
+ 
+ #### DataLayer methods
   
   ##### Read method
   The Read method which is a generic method takes a SqlParameter list and a stored procedure name as string. The Stored Procedure which makes the select operation must be available in the database. The Core class that overlaps with the database table must be used as generic type. Returns a list of the selected Core class.
