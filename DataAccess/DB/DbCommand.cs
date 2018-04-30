@@ -40,9 +40,9 @@ namespace DataAccessLayer
 		}
 		//Yapıcı metodlar
 		internal DbCommand()
-		{
-			//stored procedure olusumu
+		{			
 			_con = DbConnection.ConnectionGet();
+			_com = _con.CreateCommand();		
 		}
 		internal DbCommand(string spName)
 		{
@@ -199,12 +199,11 @@ namespace DataAccessLayer
 			SqlDataReader rdr = null;
 			try
 			{
-
 				_con.Open();
-				SqlCommand cmd = new SqlCommand(komut, _con);
-				rdr = cmd.ExecuteReader();
+				_com.CommandText = komut;
+				rdr = _com.ExecuteReader();
 			}
-			catch
+			catch(Exception ex)
 			{
 				//hata bloğu
 			}
@@ -216,14 +215,14 @@ namespace DataAccessLayer
 		/// <returns></returns>
 		internal int IsletManuelNonReturn(string komut)
 		{
-			SqlDataReader rdr = null; int etkilenenSatir = 0;
+			int etkilenenSatir = 0;
 			try
 			{
 
 				_con.Open();
-				SqlCommand cmd = new SqlCommand(komut, _con);
+				_com.CommandText = komut;
 
-				etkilenenSatir = cmd.ExecuteNonQuery();
+				etkilenenSatir = _com.ExecuteNonQuery();
 			}
 			catch
 			{
