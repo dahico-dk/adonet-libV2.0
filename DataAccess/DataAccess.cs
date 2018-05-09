@@ -10,6 +10,15 @@ namespace DataLayer
 {
 	public class DataAccess : IDisposable
 	{
+
+
+		/// <summary>
+		/// Returns data from specified stored procedure with defined parameters in given type.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="procName">Name of the proc.</param>
+		/// <param name="param">The parameter list</param>
+		/// <returns>Given Type</returns>
 		public List<T> Read<T>(string procName, List<SqlParameter> param) where T : new()
 		{
 			DataAccessLayer.DbCommand command = new DataAccessLayer.DbCommand(procName);
@@ -21,9 +30,9 @@ namespace DataLayer
 				read = command.IsletDataReader();
 				while (read.Read()) { genericlist.Add(DataLoad<T>(read)); }
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
-				ex = ex;
+				//LOG Logic
 			}
 			finally
 			{
@@ -32,8 +41,17 @@ namespace DataLayer
 				read.Close();
 				command.Temizle();
 			}
+			
 			return genericlist;
+
 		}
+		/// <summary>
+		/// Returns data with specified sql query with defined parameters in given type.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="query">The sql query.</param>
+		/// <param name="param">The parameter list</param>
+		/// <returns>Given Type</returns>
 		public List<T> ReadManuel<T>(string query, List<SqlParameter> param) where T : new()
 		{
 			DataAccessLayer.DbCommand command = new DataAccessLayer.DbCommand();
@@ -45,9 +63,9 @@ namespace DataLayer
 				read = command.IsletManuelReader(query);
 				while (read.Read()) { genericlist.Add(DataLoad<T>(read)); }
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
-				ex = ex;
+				//LOG Logic
 			}
 			finally
 			{
@@ -58,32 +76,50 @@ namespace DataLayer
 			}
 			return genericlist;
 		}
+		/// <summary>
+		/// Create, Update or Deletes with using specified stored proc.
+		/// </summary>
+		/// <param name="procName">Name of the procedure</param>
+		/// <param name="param">The parameter list</param>
+		/// <returns>Booelan</returns>
 		public bool CUD(string procName, List<SqlParameter> param)
 		{
 			DataAccessLayer.DbCommand command = new DataAccessLayer.DbCommand(procName);
 			foreach (var item in param) { command._AddParameter(item); }
 			int x = 0;
 			try { x = command.Islet(); }
-			catch (Exception ex)
+			catch (Exception)
 			{
-				ex = ex;
+				//LOG Logic
 			}
 			finally { command.Temizle(); }
 			return x > 0;
 		}
+		/// <summary>
+		/// Create, Update or Deletes with using specified sql query.
+		/// </summary>
+		/// <param name="procName">Name of the procedure</param>
+		/// <param name="param">The parameter list</param>
+		/// <returns>Boolean</returns>
 		public bool CUDManuel(string query, List<SqlParameter> param)
 		{
 			DataAccessLayer.DbCommand command = new DataAccessLayer.DbCommand();
 			foreach (var item in param) { command._AddParameter(item); }
 			int x = 0;
 			try { x = command.IsletManuelNonReturn(query); }
-			catch (Exception ex)
+			catch (Exception)
 			{
-				ex = ex;
+				//LOG Logic
 			}
 			finally { command.Temizle(); }
 			return x > 0;
 		}
+		/// <summary>
+		/// Loads the data to properties of given core class which represents database table
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="read">The read.</param>
+		/// <returns>SqlDataReader</returns>
 		private T DataLoad<T>(SqlDataReader read) where T : new()
 		{
 			T t = new T(); //DB'ye göre yaratılmış Core nesnesi
@@ -98,12 +134,15 @@ namespace DataLayer
 					item.SetValue(t, sontip, null);
 				}
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
-				//Hata durumunda log işlemleri.
+				//LOG Logic
 			}
 			return t;
 		}
+		/// <summary>
+		/// Matchs properties with specified data type and pulls data from database
+		/// </summary>		
 		private object DataMatch(SqlDataReader read, PropertyInfo item, string typename)
 		{
 			switch (typename)

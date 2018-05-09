@@ -1,6 +1,6 @@
-c:\users\daghan.kaban\source\repos\adonet-libV2.0\DataAccess\bin\Debug\DataAccess.dll
-c:\users\daghan.kaban\source\repos\adonet-libV2.0\DataAccess\bin\Debug\DataAccess.pdb
-c:\users\daghan.kaban\source\repos\adonet-libV2.0\DataAccess\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
-c:\users\daghan.kaban\source\repos\adonet-libV2.0\DataAccess\obj\Debug\DataLayer.csproj.CoreCompileInputs.cache
-c:\users\daghan.kaban\source\repos\adonet-libV2.0\DataAccess\obj\Debug\DataAccess.dll
-c:\users\daghan.kaban\source\repos\adonet-libV2.0\DataAccess\obj\Debug\DataAccess.pdb
+C:\Users\Daghan.Kaban\source\repos\adonet-libV2.0\DataAccess\bin\Debug\DataAccess.dll
+C:\Users\Daghan.Kaban\source\repos\adonet-libV2.0\DataAccess\bin\Debug\DataAccess.pdb
+C:\Users\Daghan.Kaban\source\repos\adonet-libV2.0\DataAccess\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
+C:\Users\Daghan.Kaban\source\repos\adonet-libV2.0\DataAccess\obj\Debug\DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\Daghan.Kaban\source\repos\adonet-libV2.0\DataAccess\obj\Debug\DataAccess.dll
+C:\Users\Daghan.Kaban\source\repos\adonet-libV2.0\DataAccess\obj\Debug\DataAccess.pdb

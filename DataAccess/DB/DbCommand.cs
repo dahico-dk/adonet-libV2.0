@@ -244,7 +244,7 @@ namespace DataAccessLayer
 			}
 			catch (SqlException se)
 			{
-				se = se;
+				
 
 				throw new Exception("Hatayı oku", se);
 			}
@@ -484,7 +484,7 @@ namespace DataAccessLayer
 			}
 			catch (Exception ex)
 			{
-				ex = ex;
+				
 				throw;
 			}
 		}
@@ -574,7 +574,7 @@ namespace DataAccessLayer
 		internal static byte[] ByteArrayGetir(SqlDataReader read, string alan)
 		{
 			byte[] veri = null;
-			byte tekveri = 0;
+			
 			int indeks = read.GetOrdinal(alan);
 			if (!read.IsDBNull(indeks))
 			{

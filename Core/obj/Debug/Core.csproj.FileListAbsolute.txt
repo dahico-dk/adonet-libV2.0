@@ -1,6 +1,6 @@
-c:\users\daghan.kaban\source\repos\adonet-libV2.0\Core\bin\Debug\Core.dll
-c:\users\daghan.kaban\source\repos\adonet-libV2.0\Core\bin\Debug\Core.pdb
-c:\users\daghan.kaban\source\repos\adonet-libV2.0\Core\obj\Debug\Core.csprojResolveAssemblyReference.cache
-c:\users\daghan.kaban\source\repos\adonet-libV2.0\Core\obj\Debug\Core.csproj.CoreCompileInputs.cache
-c:\users\daghan.kaban\source\repos\adonet-libV2.0\Core\obj\Debug\Core.dll
-c:\users\daghan.kaban\source\repos\adonet-libV2.0\Core\obj\Debug\Core.pdb
+C:\Users\Daghan.Kaban\source\repos\adonet-libV2.0\Core\bin\Debug\Core.dll
+C:\Users\Daghan.Kaban\source\repos\adonet-libV2.0\Core\bin\Debug\Core.pdb
+C:\Users\Daghan.Kaban\source\repos\adonet-libV2.0\Core\obj\Debug\Core.csprojResolveAssemblyReference.cache
+C:\Users\Daghan.Kaban\source\repos\adonet-libV2.0\Core\obj\Debug\Core.csproj.CoreCompileInputs.cache
+C:\Users\Daghan.Kaban\source\repos\adonet-libV2.0\Core\obj\Debug\Core.dll
+C:\Users\Daghan.Kaban\source\repos\adonet-libV2.0\Core\obj\Debug\Core.pdb

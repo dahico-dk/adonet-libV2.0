@@ -14,7 +14,7 @@ namespace DataAccess.DB
 
 		private static string _Provider;
 		private static string _ConnectionString;
-		private readonly static string _SiteName;
+		
 		private static string _datasource;
 		private static string _katalog;
 		private static string _userid;
