@@ -21,7 +21,7 @@ ADO.NET ile ilişkili dosyalar DataLayer kütüphanesinde yer alır.
   
   # Core
   
-  Core kütüphanesi veritabanı nesneleri ile eşleşecek sınıfları barındırır. Veritabanından dönen veriler bu sınıflara yüklenir.Özellik isimleri veritabanı kolon isimleri ile uyuşmalıdır. 
+  Core kütüphanesi veritabanı nesneleri ile eşleşecek POCO sınıflarını barındırır. Veritabanından dönen veriler bu sınıflara yüklenir.Özellik isimleri veritabanı kolon isimleri ile uyuşmalıdır. 
   ```
   //Örnek core sınıfı
    public class SampleCore
