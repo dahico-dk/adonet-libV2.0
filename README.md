@@ -19,7 +19,7 @@ The files associated with ADO.NET are located in the DataLayer library.
   
   # Core
   
-  The Core library contains classes that match database objects.The data returned from the database is loaded into these classes. These objects can be created in one file in different ways with the help of nested classes or constructor methods. Property names must match database column names.
+  The Core library contains POCO classes that match database objects.The data returned from the database is loaded into these classes. These objects can be created in one file in different ways with the help of nested classes or constructor methods. Property names must match database column names.
   ```
   //Example core library
    public class SampleCore
