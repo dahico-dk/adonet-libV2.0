@@ -4,7 +4,7 @@ adonet-libV2.0 is an ADO.NET project divided into different class libraries. It 
 
 The SAMPLE project is an ASP.NET MVC project that uses this database connection type.
 
-The files associated with ADO.NET are located in the DataLayer library.
+The files associated with ADO.NET are located in the DataAccess/DataLayer class.
 
 ### Database Connection:
 
