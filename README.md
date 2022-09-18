@@ -1,3 +1,5 @@
+# DEPRECATED
+
 # adonet-lib
 
 adonet-libV2.0 is an ADO.NET project divided into different class libraries. It can easily be integrated into any type of project.
